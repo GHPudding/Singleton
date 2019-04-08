@@ -2,12 +2,12 @@ java单例设计模式详解（懒汉饿汉式）+深入分析为什么懒汉式
 单例设计模式就是：运用单例模式设计的这个类在每次实例化的时候只能产生一个对象。比如A类是利用单例设计模式设计的一个类，现在B，C两个类都需要使用到A类的实例怎么办？这个时候就要看谁先实例化的A类了，如果是B类第一次实例化的A类，那么A类就只能实例化这一次了，C类调用A类的时候检查到A类已经被实例化过了，那么他就只能使用已经实例化过的A类。是不是A,B,C绕来绕去把你们绕迷了。那么下面就进入代码实战。
 还有一点需要注意，一个类如果只能实例化一次，那么它的构造函数一定是私有的。如果它的构造是public的话，那么需要使用到该类的所有类都能实例化这个类了，那就不行了。所以这个类必须是私有的。既然是私有的那就只能自己调用自己来实例化了也就顺理成章的想到通过一个方法return new A();返回一个对象。
 下面这几行代码就是一个最简单的单例设计模式，下面我们就从这个最简单的开始一步一步深入讲解。
-# public class Singleton {
-#    private Singleton(){}
-#    public Singleton getInsatnce(){
-#       return new Singleton();
-#    }
-# }
+### public class Singleton {
+###    private Singleton(){}
+###    public Singleton getInsatnce(){
+###       return new Singleton();
+###    }
+### }
 以上代码虽然完成了我们上面的要求，但是getInstance()这个方法不能直接调用啊，如果不实例化Singletonle这个类的话。
 那么自然就想到把这个类static化，使用static关键字就可以在不产生实例化对象的情况下去调用该方法。于是就变成：
 public class Singleton {
